@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "module": "commonjs", //指定生成哪个模块系统代码
     "allowJs": true, // 允许编译javascript文件
     "target": "es5", //目标代码类型

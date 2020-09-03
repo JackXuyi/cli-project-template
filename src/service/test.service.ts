@@ -1,18 +1,10 @@
-import db from '../tools/db'
+import { getRepository } from 'typeorm'
+
+import TestEntity from '../entity/test.entity'
 
 class Test {
-  private readonly dbConnection = Object.freeze(db)
-
   public async getTestData() {
-    const result = await new Promise((resolve, reject) => {
-      this.dbConnection.query('SELECT * FROM official.test', (error, res) => {
-        if (error) {
-          reject(error)
-        } else {
-          resolve(res)
-        }
-      })
-    })
+    const result = await getRepository(TestEntity).find()
     console.log('result', result)
     return result
   }
