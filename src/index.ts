@@ -3,10 +3,12 @@ import * as morgan from 'morgan'
 import * as FileStreamRotator from 'file-stream-rotator'
 import * as path from 'path'
 import { createConnection } from 'typeorm'
+import * as bodyParser from 'body-parser'
 
 import { log } from '@utils/log'
 import Router from './controller'
 import config from './config'
+import ErrorHandler from './middleware/errorHander'
 
 const logDirectory = path.join(__dirname, '../', 'log')
 const port = 8000
@@ -25,7 +27,12 @@ export default createConnection(config.db)
     // 日志
     app.use(morgan('combined', { stream: accessLogStream }))
 
+    // 格式化数据
+    app.use(bodyParser.json())
+
     app.use(Router)
+
+    app.use(ErrorHandler)
 
     app.listen(port, () => {
       log(`Server is listening on http://localhost:${port}`)
