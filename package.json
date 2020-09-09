@@ -6,7 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:server": "node ./dist/index.js",
+    "dev": "npm run dev:server & npm run dev:client & npm run dev:admin",
     "dev:server": "nodemon",
+    "dev:client": "cd ./client && npm run dev",
+    "dev:admin": "cd ./admin && npm run dev",
+    "install:client": "cd ./client && yarn",
+    "install:admin": "cd ./admin && yarn",
+    "install:all": "yarn && npm run install:client && npm run install:admin",
     "dev:ts:server": "ts-node -r  tsconfig-paths/register src/index.ts --files",
     "build:server": "rimraf ./dist && tsc --build ./tsconfig.json && babel ./dist/index.js --out-dir ./dist"
   },

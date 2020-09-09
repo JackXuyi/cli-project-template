@@ -13,6 +13,8 @@ import ErrorHandler from './middleware/errorHander'
 const logDirectory = path.join(__dirname, '../', 'log')
 const port = 8000
 
+const resolveRootPath = (...args) => path.resolve(__dirname, '../', ...args)
+
 const accessLogStream = FileStreamRotator.getStream({
   date_format: 'YYYYMMDD',
   filename: path.join(logDirectory, 'access-%DATE%.log'),
@@ -29,6 +31,12 @@ export default createConnection(config.db)
 
     // 格式化数据
     app.use(bodyParser.json())
+
+    // 后台管理静态资源
+    app.use('/admin', express.static(resolveRootPath('./public/admin')))
+
+    // 前台静态资源
+    app.use(express.static(resolveRootPath('./public/client')))
 
     app.use(Router)
 
