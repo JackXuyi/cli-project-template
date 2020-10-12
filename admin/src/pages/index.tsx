@@ -1,3 +1,6 @@
 import React from 'react'
 
-export default () => <h2>hello admin</h2>
+export default (props: any) => {
+  console.log('props', props)
+  return <h2>hello admin</h2>
+}

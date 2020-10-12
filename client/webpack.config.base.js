@@ -5,6 +5,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+const config = require('./config')
+
 const resolvePath = (...args) => path.resolve(__dirname, ...args)
 const isPro = process.env.NODE_ENV === 'production'
 
@@ -93,7 +95,7 @@ module.exports = {
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }), // 清理数据
     new HtmlWebpackPlugin({
       // 自动打包数据
-      title: '涂鸦智能',
+      title: config.title,
       template: resolvePath('./index.html'), // html文件模板
     }),
     // new TsconfigPathsPlugin({

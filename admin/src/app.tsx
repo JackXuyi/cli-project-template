@@ -3,8 +3,14 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import { Layout } from 'antd'
 
 import Home from './pages'
+import Login from './pages/login'
+import { getRoutePath } from './utils/utils'
 
-const RouteList = [{ path: '/admin', component: Home, exact: true }]
+const RouteList = [
+  { path: getRoutePath('/home'), component: Home, exact: true },
+  { path: getRoutePath('/login'), component: Login, exact: true },
+  { path: getRoutePath('/'), component: () => <h2>404 Not Found</h2>, exact: false },
+]
 
 const App = () => (
   <Layout>
@@ -13,7 +19,7 @@ const App = () => (
         const { exact = true, path, component } = item
         return <Route key={path} exact={exact} path={path} component={component} />
       })}
-      <Redirect to="/admin" />
+      <Redirect to="/admin/login" />
     </Switch>
   </Layout>
 )
